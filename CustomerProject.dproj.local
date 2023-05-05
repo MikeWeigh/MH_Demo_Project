@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/05/04 11:32:28.000.032,=C:\Delphi\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/05/05 10:29:19.000.688,=C:\Delphi\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/05/05 10:32:27.000.118,C:\Delphi\Scratch\CustomerProject\frm.Main.dfm=C:\Delphi\Projects\Unit1.dfm</Transaction>
+    <Transaction>2023/05/05 10:32:27.000.118,C:\Delphi\Scratch\CustomerProject\frm.Main.pas=C:\Delphi\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/05/05 10:32:53.000.277,=C:\Delphi\Scratch\CustomerProject\entities.pas</Transaction>
+    <Transaction>2023/05/05 10:33:02.000.003,=C:\Delphi\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/05/05 10:33:12.000.185,C:\Delphi\Scratch\CustomerProject\dm.Main.pas=C:\Delphi\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/05/05 10:33:12.000.185,C:\Delphi\Scratch\CustomerProject\dm.Main.dfm=C:\Delphi\Projects\Unit1.dfm</Transaction>
+    <Transaction>2023/05/05 10:39:07.000.677,C:\Delphi\Scratch\CustomerProject\CustomerProject.dproj=C:\Delphi\Projects\Project1.dproj</Transaction>
+    <Transaction>2023/05/05 11:59:50.714,=C:\Delphi\Scratch\CustomerProject\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
