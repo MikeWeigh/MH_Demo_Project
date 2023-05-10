@@ -52,10 +52,30 @@ type
     adsCustomerPostCode: TStringField;
     adsCustomerContactNo: TStringField;
     adsCustomerDateOfBirth: TDateField;
+    adsLabel: TAureliusDataset;
+    adsLabelSelf: TAureliusEntityField;
+    adsLabelId: TIntegerField;
+    adsLabelLabelName: TStringField;
+    adsArtist: TAureliusDataset;
+    adsArtistSelf: TAureliusEntityField;
+    adsArtistId: TIntegerField;
+    adsArtistArtistName: TStringField;
+    adsArtistRecordLabel: TAureliusEntityField;
+    adsArtistLabelLookup: TStringField;
+    adsAlbum: TAureliusDataset;
+    adsAlbumSelf: TAureliusEntityField;
+    adsAlbumId: TIntegerField;
+    adsAlbumAlbumName: TStringField;
+    adsAlbumAlbumPrice: TCurrencyField;
+    adsAlbumArtist: TAureliusEntityField;
+    adsArtistAlbums: TDataSetField;
     procedure DataModuleCreate( Sender: TObject );
     procedure AureliusModelEvents1SQLExecuting( Sender: TObject;
       Args: TSQLExecutingArgs );
     procedure adsCustomerBeforeOpen( Dataset: TDataSet );
+    procedure adsLabelBeforeOpen( Dataset: TDataSet );
+    procedure adsArtistBeforeOpen(DataSet: TDataSet);
+    procedure adsAlbumBeforeOpen(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -68,16 +88,31 @@ var
 implementation
 
 uses
-entities;
+  entities;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
 
 
+procedure TdmMain.adsAlbumBeforeOpen(DataSet: TDataSet);
+begin
+  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TAlbum > );
+end;
+
+procedure TdmMain.adsArtistBeforeOpen(DataSet: TDataSet);
+begin
+ TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TArtist > );
+end;
+
 procedure TdmMain.adsCustomerBeforeOpen( Dataset: TDataSet );
 begin
   TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TCustomer > );
+end;
+
+procedure TdmMain.adsLabelBeforeOpen( Dataset: TDataSet );
+begin
+  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TLabel > );
 end;
 
 procedure TdmMain.AureliusModelEvents1SQLExecuting( Sender: TObject;
@@ -94,7 +129,13 @@ procedure TdmMain.DataModuleCreate( Sender: TObject );
 begin
   Schema.UpdateDatabase;
   adsCustomer.Manager := Manager.ObjManager;
+  adsLabel.Manager    := Manager.ObjManager;
+  adsArtist.Manager  := Manager.ObjManager;
+  adsAlbum.Manager  := Manager.ObjManager;
   adsCustomer.Open;
+  adsLabel.Open;
+  adsArtist.Open;
+  adsAlbum.Open;
 end;
 
 end.

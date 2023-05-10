@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/04/25 16:35:32.000.903,=rtl.dcp</Transaction>
+    <Transaction>2023/04/25 16:36:06.000.264,=rtl.dcp</Transaction>
+    <Transaction>2023/05/05 11:57:53.000.139,=rtl.dcp</Transaction>
+    <Transaction>2023/05/05 12:06:13.000.480,=rtl.dcp</Transaction>
+    <Transaction>2023/05/05 12:06:24.000.534,=C:\Delphi\Scratch\CustomerProject\entities.pas</Transaction>
+    <Transaction>2023/05/05 12:06:35.000.489,=tmsbcl.dcp</Transaction>
+    <Transaction>2023/05/05 12:06:35.000.453,=dbrtl.dcp</Transaction>
+    <Transaction>2023/05/05 12:06:35.000.556,=aurelius.dcp</Transaction>
+    <Transaction>2023/05/05 12:08:00.000.626,C:\Delphi\Projects\Package1.dproj=C:\Delphi\Projects\MyCustProjectPackage.dproj</Transaction>
+    <Transaction>2023/05/05 17:14:16.000.570,C:\Delphi\Projects\MyCustProjectPackage.dproj=C:\Delphi\Scratch\CustomerProject\MyCustProjectPackage.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

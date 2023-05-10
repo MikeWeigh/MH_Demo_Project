@@ -23,7 +23,11 @@ uses
   Vcl.DockTabSet,
   AdvPageControl,
   Vcl.ComCtrls,
-  dm.Main;
+  dm.Main,
+  cusDBGrid,
+
+  Rtti,
+  UITypes;
 
 type
   TfrmMain = class( TForm )
@@ -42,10 +46,19 @@ type
     grdAlbums: TDBGrid;
     grdOrders: TDBGrid;
     dsCustomer: TDataSource;
+    dsArtists: TDataSource;
+    dsLabel: TDataSource;
+    btnLabels: TButton;
+    tsLabels: TTabSheet;
+    grdLabel: TDBGrid;
+    grdArtistsAlbums: TDBGrid;
+    dsAlbum: TDataSource;
+    TabSheet1: TTabSheet;
     procedure btnCustomersClick( Sender: TObject );
     procedure btnArtistsClick( Sender: TObject );
     procedure btnAlbumsClick( Sender: TObject );
     procedure btnOrdersClick( Sender: TObject );
+    procedure btnLabelsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,6 +77,12 @@ procedure TfrmMain.btnCustomersClick( Sender: TObject );
 begin
   tsCustomer.Visible      := True;
   PageControl1.ActivePage := tsCustomer;
+end;
+
+procedure TfrmMain.btnLabelsClick(Sender: TObject);
+begin
+  tsLabels.Visible        := True;
+  PageControl1.ActivePage := tsLabels;
 end;
 
 procedure TfrmMain.btnOrdersClick( Sender: TObject );

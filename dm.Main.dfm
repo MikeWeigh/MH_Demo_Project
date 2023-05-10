@@ -73,8 +73,8 @@ object dmMain: TdmMain
         DataType = ftDate
       end>
     BeforeOpen = adsCustomerBeforeOpen
-    Left = 456
-    Top = 112
+    Left = 472
+    Top = 40
     DesignClass = 'entities.TCustomer'
     object adsCustomerSelf: TAureliusEntityField
       FieldName = 'Self'
@@ -134,5 +134,170 @@ object dmMain: TdmMain
     OnSQLExecuting = AureliusModelEvents1SQLExecuting
     Left = 352
     Top = 288
+  end
+  object adsLabel: TAureliusDataset
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'LabelName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end>
+    BeforeOpen = adsLabelBeforeOpen
+    Left = 472
+    Top = 104
+    DesignClass = 'entities.TLabel'
+    object adsLabelSelf: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsLabelId: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object adsLabelLabelName: TStringField
+      DisplayWidth = 30
+      FieldName = 'LabelName'
+      Required = True
+      Size = 255
+    end
+  end
+  object adsArtist: TAureliusDataset
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ArtistName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'RecordLabel'
+        DataType = ftVariant
+      end
+      item
+        Name = 'Albums'
+        Attributes = [faReadonly]
+        DataType = ftDataSet
+      end>
+    BeforeOpen = adsArtistBeforeOpen
+    Left = 472
+    Top = 168
+    DesignClass = 'entities.TArtist'
+    object adsArtistSelf: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsArtistId: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object adsArtistArtistName: TStringField
+      DisplayWidth = 30
+      FieldName = 'ArtistName'
+      Required = True
+      Size = 255
+    end
+    object adsArtistRecordLabel: TAureliusEntityField
+      FieldName = 'RecordLabel'
+      Visible = False
+    end
+    object adsArtistLabelLookup: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LabelLookup'
+      LookupDataSet = adsLabel
+      LookupKeyFields = 'Self'
+      LookupResultField = 'LabelName'
+      KeyFields = 'RecordLabel'
+      Lookup = True
+    end
+    object adsArtistAlbums: TDataSetField
+      FieldName = 'Albums'
+      ReadOnly = True
+      Visible = False
+    end
+  end
+  object adsAlbum: TAureliusDataset
+    DatasetField = adsArtistAlbums
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'AlbumName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'AlbumPrice'
+        Attributes = [faRequired]
+        DataType = ftCurrency
+      end
+      item
+        Name = 'Artist'
+        DataType = ftVariant
+      end>
+    BeforeOpen = adsAlbumBeforeOpen
+    Left = 472
+    Top = 240
+    DesignClass = 'entities.TAlbum'
+    object adsAlbumSelf: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsAlbumId: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object adsAlbumAlbumName: TStringField
+      DisplayWidth = 30
+      FieldName = 'AlbumName'
+      Required = True
+      Size = 255
+    end
+    object adsAlbumAlbumPrice: TCurrencyField
+      FieldName = 'AlbumPrice'
+      Required = True
+    end
+    object adsAlbumArtist: TAureliusEntityField
+      FieldName = 'Artist'
+      Visible = False
+    end
   end
 end

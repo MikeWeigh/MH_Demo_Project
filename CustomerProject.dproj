@@ -94,6 +94,7 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <None Include="C:\Users\Public\Documents\Embarcadero\Studio\22.0\Bpl\MyCustProjectPackage.bpl"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
