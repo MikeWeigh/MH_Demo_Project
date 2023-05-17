@@ -94,6 +94,19 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="MikeGrid.pas"/>
+        <DCCReference Include="form.InvoiceList.pas">
+            <Form>frmInvoiceList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="frm.Import.pas">
+            <Form>Form1</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="frm.Pagination.pas">
+            <Form>frmPagination</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="C:\Users\Public\Documents\Embarcadero\Studio\22.0\Bpl\MyCustProjectPackage.bpl"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

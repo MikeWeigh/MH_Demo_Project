@@ -1,0 +1,29 @@
+unit MikeGrid;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.Controls, Vcl.Grids, Vcl.DBGrids;
+
+type
+  MikeGrid = class(TDBGrid)
+  private
+    { Private declarations }
+  protected
+    { Protected declarations }
+  public
+    { Public declarations }
+  published
+    { Published declarations }
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Samples', [MikeGrid]);
+end;
+
+end.

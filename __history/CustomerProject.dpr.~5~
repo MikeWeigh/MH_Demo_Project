@@ -1,0 +1,21 @@
+program CustomerProject;
+
+uses
+  Vcl.Forms,
+  frm.Main in 'frm.Main.pas' {frmMain},
+  Vcl.Themes,
+  Vcl.Styles,
+  entities in 'entities.pas',
+  dm.Main in 'dm.Main.pas' {dmMain: TDataModule},
+  DBGrid1 in 'DBGrid1.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Glow');
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TdmMain, dmMain);
+  Application.Run;
+end.

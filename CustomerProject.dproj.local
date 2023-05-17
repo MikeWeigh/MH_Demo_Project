@@ -7,10 +7,54 @@
     <Transaction>2023/05/05 10:32:27.000.118,C:\Delphi\Scratch\CustomerProject\frm.Main.pas=C:\Delphi\Projects\Unit1.pas</Transaction>
     <Transaction>2023/05/05 10:32:53.000.277,=C:\Delphi\Scratch\CustomerProject\entities.pas</Transaction>
     <Transaction>2023/05/05 10:33:02.000.003,=C:\Delphi\Projects\Unit1.pas</Transaction>
-    <Transaction>2023/05/05 10:33:12.000.185,C:\Delphi\Scratch\CustomerProject\dm.Main.pas=C:\Delphi\Projects\Unit1.pas</Transaction>
     <Transaction>2023/05/05 10:33:12.000.185,C:\Delphi\Scratch\CustomerProject\dm.Main.dfm=C:\Delphi\Projects\Unit1.dfm</Transaction>
+    <Transaction>2023/05/05 10:33:12.000.185,C:\Delphi\Scratch\CustomerProject\dm.Main.pas=C:\Delphi\Projects\Unit1.pas</Transaction>
     <Transaction>2023/05/05 10:39:07.000.677,C:\Delphi\Scratch\CustomerProject\CustomerProject.dproj=C:\Delphi\Projects\Project1.dproj</Transaction>
     <Transaction>2023/05/05 11:59:50.000.714,=C:\Delphi\Scratch\CustomerProject\Unit1.pas</Transaction>
     <Transaction>2023/05/09 12:24:26.000.302,=C:\Users\Public\Documents\Embarcadero\Studio\22.0\Bpl\MyCustProjectPackage.bpl</Transaction>
+    <Transaction>2023/05/10 11:58:01.000.582,=C:\Delphi\Scratch\CustomerProject\Unit1.pas</Transaction>
+    <Transaction>2023/05/10 11:58:12.000.304,C:\Delphi\Scratch\CustomerProject\Unit1.pas=C:\Delphi\Scratch\CustomerProject\cusDBGrid.pas</Transaction>
+    <Transaction>2023/05/10 12:05:48.000.175,=C:\Delphi\Scratch\CustomerProject\TDBGrid1.pas</Transaction>
+    <Transaction>2023/05/10 12:08:24.000.893,C:\Delphi\Scratch\CustomerProject\cusDBGrid.pas=</Transaction>
+    <Transaction>2023/05/10 12:08:29.000.254,C:\Delphi\Scratch\CustomerProject\TDBGrid1.pas=</Transaction>
+    <Transaction>2023/05/10 12:10:13.000.902,=C:\Delphi\Scratch\CustomerProject\DBGrid1.pas</Transaction>
+    <Transaction>2023/05/10 12:26:09.000.313,C:\Delphi\Scratch\CustomerProject\DBGrid1.pas=</Transaction>
+    <Transaction>2023/05/10 12:28:56.000.635,=C:\Delphi\Scratch\CustomerProject\MikeGrid.pas</Transaction>
+    <Transaction>2023/05/11 12:38:31.000.520,=C:\Delphi\Scratch\CustomerProject\Unit1.pas</Transaction>
+    <Transaction>2023/05/11 12:38:56.000.724,C:\Delphi\Scratch\CustomerProject\Invoice.Items.pas=C:\Delphi\Scratch\CustomerProject\Unit1.pas</Transaction>
+    <Transaction>2023/05/11 12:38:56.000.724,C:\Delphi\Scratch\CustomerProject\Invoice.Items.dfm=C:\Delphi\Scratch\CustomerProject\Unit1.dfm</Transaction>
+    <Transaction>2023/05/11 12:58:29.000.969,C:\Delphi\Scratch\CustomerProject\Invoice.Items.pas=</Transaction>
+    <Transaction>2023/05/11 14:14:16.000.791,=C:\Delphi\Scratch\CustomerProject\Unit1.pas</Transaction>
+    <Transaction>2023/05/11 14:14:28.000.085,C:\Delphi\Scratch\CustomerProject\form.InvoiceList.pas=C:\Delphi\Scratch\CustomerProject\Unit1.pas</Transaction>
+    <Transaction>2023/05/11 14:14:28.000.085,C:\Delphi\Scratch\CustomerProject\form.InvoiceList.dfm=C:\Delphi\Scratch\CustomerProject\Unit1.dfm</Transaction>
+    <Transaction>2023/05/16 11:15:28.000.243,=C:\Delphi\Scratch\CustomerProject\Unit1.pas</Transaction>
+    <Transaction>2023/05/16 11:15:52.000.127,C:\Delphi\Scratch\CustomerProject\Unit1.dfm=C:\Delphi\Scratch\CustomerProject\frm.Import.dfm</Transaction>
+    <Transaction>2023/05/16 11:15:52.000.127,C:\Delphi\Scratch\CustomerProject\Unit1.pas=C:\Delphi\Scratch\CustomerProject\frm.Import.pas</Transaction>
+    <Transaction>2023/05/16 12:58:52.000.782,=C:\Delphi\Scratch\CustomerProject\Unit2.pas</Transaction>
+    <Transaction>2023/05/16 12:59:02.000.295,C:\Delphi\Scratch\CustomerProject\Unit2.dfm=C:\Delphi\Scratch\CustomerProject\frm.Pagination.dfm</Transaction>
+    <Transaction>2023/05/16 12:59:02.000.295,C:\Delphi\Scratch\CustomerProject\Unit2.pas=C:\Delphi\Scratch\CustomerProject\frm.Pagination.pas</Transaction>
   </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="C:"/>
+    <File Path="C:\Users"/>
+    <File Path="C:\Users\Public"/>
+    <File Path="C:\Users\Public\Documents"/>
+    <File Path="C:\Users\Public\Documents\Embarcadero"/>
+    <File Path="C:\Users\Public\Documents\Embarcadero\Studio"/>
+    <File Path="C:\Users\Public\Documents\Embarcadero\Studio\22.0"/>
+    <File Path="C:\Users\Public\Documents\Embarcadero\Studio\22.0\Bpl"/>
+    <File Path="C:\Users\Public\Documents\Embarcadero\Studio\22.0\Bpl\MyCustProjectPackage.bpl"/>
+    <File Path="dm.Main.pas"/>
+    <File Path="dm.Main.dfm"/>
+    <File Path="entities.pas"/>
+    <File Path="frm.Main.pas"/>
+    <File Path="frm.Main.dfm"/>
+    <File Path="MikeGrid.pas"/>
+    <File Path="form.InvoiceList.pas"/>
+    <File Path="form.InvoiceList.dfm"/>
+    <File Path="frm.Import.pas"/>
+    <File Path="frm.Import.dfm"/>
+    <File Path="frm.Pagination.pas"/>
+    <File Path="frm.Pagination.dfm"/>
+  </ProjectSortOrder>
 </BorlandProject>

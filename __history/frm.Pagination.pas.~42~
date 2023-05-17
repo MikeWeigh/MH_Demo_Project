@@ -1,0 +1,79 @@
+unit frm.Pagination;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  AdvUtil,
+  Vcl.Grids,
+  AdvObj,
+  BaseGrid,
+  AdvGrid,
+  DBAdvGrid,
+  Data.DB,
+  AdvSearchEditEditLink,
+  AdvGridPopupToolBar,
+  AdvToolBtn,
+  AdvToolBar,
+  Aurelius.Criteria.Base,
+  entities;
+
+type
+  TfrmPagination = class( TForm )
+    DBAdvGrid1: TDBAdvGrid;
+    dsCustomer: TDataSource;
+    AdvToolButton1: TAdvToolButton;
+    AdvGridPopupToolBar1: TAdvGridPopupToolBar;
+    AdvToolBar1: TAdvToolBar;
+    procedure LoadCustomers( Sender: TObject );
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPagination: TfrmPagination;
+
+implementation
+
+uses
+  dm.Main;
+{$R *.dfm}
+
+
+procedure TfrmPagination.LoadCustomers( Sender: TObject );
+var
+  dmMain      : TdmMain;
+  Criteria    : TCriteria;
+  Page        : Integer;
+  CustomerList: TObject;
+begin
+  DBAdvGrid1.DataSource.Enabled := False;
+  try
+    dmMain.Manager.Refresh;
+  finally
+    DBAdvGrid1.DataSource.Enabled := True;
+  end;
+
+ // dmMain.LoadCustomers;
+ // CustomerList :=  dmMain.Manager.Find< TCustomer >(1);
+  // dmMain.adsCustomerPagination.Refresh;
+ { dmMain.adsCustomerPagination.Close;
+  dmMain.adsCustomerPagination.Manager.Clear;
+  Criteria := dmMain.Manager.Find( TCustomer ).Take( 20 );
+ // Inc(Page);
+  dmMain.adsCustomerPagination.SetSourceCriteria( Criteria );
+ // dmMain.adsCustomerPagination.Manager := dmMain.Manager.ObjManager;
+  dmMain.adsCustomerPagination.Open;    }
+end;
+
+end.

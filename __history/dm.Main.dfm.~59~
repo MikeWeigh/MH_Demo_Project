@@ -1,0 +1,688 @@
+object dmMain: TdmMain
+  OnCreate = DataModuleCreate
+  Height = 480
+  Width = 640
+  object AureliusConnection1: TAureliusConnection
+    AdapterName = 'FireDac'
+    AdaptedConnection = FDConnection1
+    SQLDialect = 'Firebird'
+    Left = 48
+    Top = 40
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'Database=C:\Delphi\Scratch\CustomerProject\CUST.fdb'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Port=30500'
+      'DriverID=FB')
+    Left = 56
+    Top = 376
+  end
+  object adsCustomer: TAureliusDataset
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'FirstName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'LastName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Address1'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Address2'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'City'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'PostCode'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'ContactNo'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'DateOfBirth'
+        DataType = ftDate
+      end
+      item
+        Name = 'Invoices'
+        Attributes = [faReadonly]
+        DataType = ftDataSet
+      end>
+    BeforeOpen = adsCustomerBeforeOpen
+    RecordCountMode = Retrieve
+    Left = 472
+    Top = 40
+    DesignClass = 'entities.TCustomer'
+    object adsCustomerSelf: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsCustomerId: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object adsCustomerFirstName: TStringField
+      FieldName = 'FirstName'
+      Required = True
+      Size = 30
+    end
+    object adsCustomerLastName: TStringField
+      FieldName = 'LastName'
+      Required = True
+      Size = 30
+    end
+    object adsCustomerAddress1: TStringField
+      FieldName = 'Address1'
+      Size = 30
+    end
+    object adsCustomerAddress2: TStringField
+      FieldName = 'Address2'
+      Size = 30
+    end
+    object adsCustomerCity: TStringField
+      FieldName = 'City'
+    end
+    object adsCustomerPostCode: TStringField
+      FieldName = 'PostCode'
+      Size = 10
+    end
+    object adsCustomerContactNo: TStringField
+      FieldName = 'ContactNo'
+      Size = 10
+    end
+    object adsCustomerDateOfBirth: TDateField
+      FieldName = 'DateOfBirth'
+    end
+    object adsCustomerInvoices: TDataSetField
+      FieldName = 'Invoices'
+      ReadOnly = True
+    end
+  end
+  object Manager: TAureliusManager
+    Connection = AureliusConnection1
+    Left = 48
+    Top = 104
+  end
+  object Schema: TAureliusDBSchema
+    Connection = AureliusConnection1
+    Left = 48
+    Top = 192
+  end
+  object AureliusModelEvents1: TAureliusModelEvents
+    OnSQLExecuting = AureliusModelEvents1SQLExecuting
+    Left = 48
+    Top = 280
+  end
+  object adsLabel: TAureliusDataset
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'LabelName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end>
+    BeforeOpen = adsLabelBeforeOpen
+    Left = 472
+    Top = 104
+    DesignClass = 'entities.TLabel'
+    object adsLabelSelf: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsLabelId: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object adsLabelLabelName: TStringField
+      DisplayWidth = 30
+      FieldName = 'LabelName'
+      Required = True
+      Size = 255
+    end
+  end
+  object adsArtist: TAureliusDataset
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ArtistName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'RecordLabel'
+        DataType = ftVariant
+      end
+      item
+        Name = 'Albums'
+        Attributes = [faReadonly]
+        DataType = ftDataSet
+      end>
+    BeforeOpen = adsArtistBeforeOpen
+    Left = 472
+    Top = 168
+    DesignClass = 'entities.TArtist'
+    object adsArtistSelf: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsArtistId: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object adsArtistArtistName: TStringField
+      DisplayWidth = 30
+      FieldName = 'ArtistName'
+      Required = True
+      Size = 255
+    end
+    object adsArtistRecordLabel: TAureliusEntityField
+      FieldName = 'RecordLabel'
+      LookupDataSet = adsLabel
+      LookupKeyFields = 'Self'
+      LookupResultField = 'LabelName'
+      KeyFields = 'RecordLabel'
+      Visible = False
+    end
+    object adsArtistAlbums: TDataSetField
+      FieldName = 'Albums'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsArtistLabelLookup: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LabelLookup'
+      LookupDataSet = adsLabel
+      LookupKeyFields = 'Self'
+      LookupResultField = 'LabelName'
+      KeyFields = 'RecordLabel'
+      Size = 50
+      Lookup = True
+    end
+  end
+  object adsAlbum: TAureliusDataset
+    DatasetField = adsArtistAlbums
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'AlbumName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'AlbumPrice'
+        Attributes = [faRequired]
+        DataType = ftCurrency
+      end
+      item
+        Name = 'Artist'
+        DataType = ftVariant
+      end>
+    BeforeOpen = adsAlbumBeforeOpen
+    Left = 472
+    Top = 240
+    DesignClass = 'entities.TAlbum'
+    object adsAlbumSelf: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsAlbumId: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object adsAlbumAlbumName: TStringField
+      DisplayWidth = 50
+      FieldName = 'AlbumName'
+      Required = True
+      Size = 255
+    end
+    object adsAlbumAlbumPrice: TCurrencyField
+      FieldName = 'AlbumPrice'
+      Required = True
+    end
+    object adsAlbumArtist: TAureliusEntityField
+      FieldName = 'Artist'
+      Visible = False
+    end
+  end
+  object adsInvoice: TAureliusDataset
+    DatasetField = adsCustomerInvoices
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'InvoiceNo'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'Customer'
+        DataType = ftVariant
+      end
+      item
+        Name = 'InvoiceDate'
+        Attributes = [faRequired]
+        DataType = ftDateTime
+      end
+      item
+        Name = 'Items'
+        Attributes = [faReadonly]
+        DataType = ftDataSet
+      end>
+    BeforeOpen = adsInvoiceAllBeforeOpen
+    Left = 472
+    Top = 304
+    DesignClass = 'entities.TInvoice'
+    object adsInvoiceSelf: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsInvoiceId: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object adsInvoiceInvoiceNo: TIntegerField
+      FieldName = 'InvoiceNo'
+      Required = True
+    end
+    object adsInvoiceInvoiceDate: TDateTimeField
+      FieldName = 'InvoiceDate'
+      Required = True
+    end
+    object adsInvoiceItems: TDataSetField
+      FieldName = 'Items'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsInvoiceCustomer: TAureliusEntityField
+      FieldName = 'Customer'
+      Visible = False
+    end
+  end
+  object adsInvoiceItem: TAureliusDataset
+    DatasetField = adsInvoiceItems
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'Invoice'
+        DataType = ftVariant
+      end
+      item
+        Name = 'Album'
+        DataType = ftVariant
+      end
+      item
+        Name = 'Quantity'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'GrossPrice'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftCurrency
+      end>
+    BeforeOpen = adsInvoiceItemBeforeOpen
+    Left = 472
+    Top = 368
+    DesignClass = 'entities.TInvoiceItem'
+    object adsInvoiceItemSelf: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object adsInvoiceItemId: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object adsInvoiceItemInvoice: TAureliusEntityField
+      FieldName = 'Invoice'
+      Visible = False
+    end
+    object adsInvoiceItemAlbum: TAureliusEntityField
+      FieldName = 'Album'
+    end
+    object adsInvoiceItemQuantity: TIntegerField
+      FieldName = 'Quantity'
+      Required = True
+    end
+    object adsInvoiceItemGrossPrice: TCurrencyField
+      FieldName = 'GrossPrice'
+      ReadOnly = True
+      Required = True
+    end
+    object adsInvoiceItemAlbumLookup: TStringField
+      DisplayWidth = 50
+      FieldKind = fkLookup
+      FieldName = 'AlbumLookup'
+      LookupDataSet = adsAlbumLookup
+      LookupKeyFields = 'Self'
+      LookupResultField = 'AlbumName'
+      KeyFields = 'Album'
+      Lookup = True
+    end
+  end
+  object adsAlbumLookup: TAureliusDataset
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'AlbumName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'AlbumPrice'
+        Attributes = [faRequired]
+        DataType = ftCurrency
+      end
+      item
+        Name = 'Artist'
+        DataType = ftVariant
+      end>
+    BeforeOpen = adsAlbumLookupBeforeOpen
+    Left = 376
+    Top = 240
+    DesignClass = 'entities.TAlbum'
+    object AureliusEntityField1: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object StringField1: TStringField
+      DisplayWidth = 50
+      FieldName = 'AlbumName'
+      Required = True
+      Size = 255
+    end
+    object CurrencyField1: TCurrencyField
+      FieldName = 'AlbumPrice'
+      Required = True
+    end
+    object AureliusEntityField2: TAureliusEntityField
+      FieldName = 'Artist'
+      Visible = False
+    end
+  end
+  object adsInvoiceAll: TAureliusDataset
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'InvoiceNo'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'Customer'
+        DataType = ftVariant
+      end
+      item
+        Name = 'InvoiceDate'
+        Attributes = [faRequired]
+        DataType = ftDateTime
+      end
+      item
+        Name = 'Items'
+        Attributes = [faReadonly]
+        DataType = ftDataSet
+      end>
+    BeforeOpen = adsInvoiceAllBeforeOpen
+    RecordCountMode = Retrieve
+    Left = 376
+    Top = 304
+    DesignClass = 'entities.TInvoice'
+    object AureliusEntityField3: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'InvoiceNo'
+      Required = True
+    end
+    object DateTimeField1: TDateTimeField
+      FieldName = 'InvoiceDate'
+      Required = True
+    end
+    object DataSetField1: TDataSetField
+      FieldName = 'Items'
+      ReadOnly = True
+      Visible = False
+    end
+    object AureliusEntityField4: TAureliusEntityField
+      FieldName = 'Customer'
+      Visible = False
+    end
+  end
+  object adsCustomerPagination: TAureliusDataset
+    FieldDefs = <
+      item
+        Name = 'Self'
+        Attributes = [faReadonly]
+        DataType = ftVariant
+      end
+      item
+        Name = 'Id'
+        Attributes = [faReadonly, faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'FirstName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'LastName'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Address1'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Address2'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'City'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'PostCode'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'ContactNo'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'DateOfBirth'
+        DataType = ftDate
+      end
+      item
+        Name = 'Invoices'
+        Attributes = [faReadonly]
+        DataType = ftDataSet
+      end>
+    RecordCountMode = Retrieve
+    Left = 344
+    Top = 40
+    DesignClass = 'entities.TCustomer'
+    object AureliusEntityField5: TAureliusEntityField
+      FieldName = 'Self'
+      ReadOnly = True
+      Visible = False
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'Id'
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object StringField2: TStringField
+      FieldName = 'FirstName'
+      Required = True
+      Size = 30
+    end
+    object StringField3: TStringField
+      FieldName = 'LastName'
+      Required = True
+      Size = 30
+    end
+    object StringField4: TStringField
+      FieldName = 'Address1'
+      Size = 30
+    end
+    object StringField5: TStringField
+      FieldName = 'Address2'
+      Size = 30
+    end
+    object StringField6: TStringField
+      FieldName = 'City'
+    end
+    object StringField7: TStringField
+      FieldName = 'PostCode'
+      Size = 10
+    end
+    object StringField8: TStringField
+      FieldName = 'ContactNo'
+      Size = 10
+    end
+    object DateField1: TDateField
+      FieldName = 'DateOfBirth'
+    end
+    object DataSetField2: TDataSetField
+      FieldName = 'Invoices'
+      ReadOnly = True
+    end
+  end
+end

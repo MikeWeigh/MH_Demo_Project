@@ -10,8 +10,10 @@ uses
   SysUtils;
 
 type
-  TArtist = class;
-  TAlbum = class;
+  TArtist      = class;
+  TAlbum       = class;
+  TInvoice     = class;
+  TInvoiceItem = class;
 
   [ Entity, Automapping ]
   TCustomer = class
@@ -25,6 +27,12 @@ type
     FPostCode   : Nullable< string >;
     FContactNo  : Nullable< string >;
     FDateOfBirth: Nullable< TDate >;
+    [ ManyValuedAssociation( [ ], CascadeTypeAllRemoveOrphan, 'FCustomer' ) ]
+    FInvoices: Proxy< TList< TInvoice > >;
+    function GetInvoices: TList< TInvoice >;
+  public
+   constructor Create;
+   destructor Destroy; override;
   public
     property Id         : Integer read FId write FId;
     property FirstName  : string read FFirstName write FFirstName;
@@ -35,6 +43,7 @@ type
     property PostCode   : Nullable< string > read FPostCode write FPostCode;
     property ContactNo  : Nullable< string > read FContactNo write FContactNo;
     property DateOfBirth: Nullable< TDate > read FDateOfBirth write FDateOfBirth;
+    property Invoices : TList< TInvoice > read GetInvoices;
   end;
 
   [ Entity, Automapping ]
@@ -63,14 +72,14 @@ type
     function GetRecordLabel: TLabel;
     procedure SetRecordLabel( const Value: TLabel );
     function GetAlbums: TList< TAlbum >;
-   public
+  public
     constructor Create;
     destructor Destroy; override;
   public
     property Id         : Integer read FId write FId;
     property ArtistName : string read FArtistName write FArtistName;
     property RecordLabel: TLabel read GetRecordLabel write SetRecordLabel;
-    property Albums : TList< TAlbum > read GetAlbums;
+    property Albums     : TList< TAlbum > read GetAlbums;
   end;
 
   [ Entity, Automapping ]
@@ -81,7 +90,7 @@ type
     FAlbumPrice: Currency;
     FArtist    : Proxy< TArtist >;
     function GetArtist: TArtist;
-    procedure SetArtist(const Value: TArtist);
+    procedure SetArtist( const Value: TArtist );
   public
     constructor Create;
     destructor Destroy; override;
@@ -90,6 +99,50 @@ type
     property AlbumName : string read FAlbumName write FAlbumName;
     property AlbumPrice: Currency read FAlbumPrice write FAlbumPrice;
     property Artist    : TArtist read GetArtist write SetArtist;
+  end;
+
+  [ Entity, Automapping ]
+  TInvoice = class
+  private
+    FId         : Integer;
+    FInvoiceNo  : Integer;
+    FCustomer   : Proxy<TCustomer>;
+    FInvoiceDate: TDateTime;
+    [ ManyValuedAssociation( [ ], CascadeTypeAllRemoveOrphan, 'FInvoice' ) ]
+    FItems: Proxy< TList< TInvoiceItem > >;
+    function GetItems: TList< TInvoiceItem >;
+    function GetCustomer: TCustomer;
+    procedure SetCustomer( const Value: TCustomer );
+  public
+    constructor Create;
+    destructor Destroy; override;
+  public
+    property Id         : Integer read FId write FId;
+    property InvoiceNo  : Integer read FInvoiceNo write FInvoiceNo;
+    property Customer    : TCustomer read GetCustomer write SetCustomer;
+    property InvoiceDate: TDateTime read FInvoiceDate write FInvoiceDate;
+    property Items      : TList< TInvoiceItem > read GetItems;
+  end;
+
+  [ Entity, Automapping ]
+  TInvoiceItem = class
+  private
+    FId      : Integer;
+    FInvoice : Proxy< TInvoice >;
+    FAlbum   : TAlbum;
+    FQuantity: Integer;
+    function GetInvoice: TInvoice;
+    procedure SetInvoice( const Value: TInvoice );
+    function GetGrossPrice: Currency;
+  public
+    constructor Create;
+    destructor Destroy; override;
+  public
+    property Id        : Integer read FId write FId;
+    property Invoice   : TInvoice read GetInvoice write SetInvoice;
+    property Album     : TAlbum read FAlbum write FAlbum;
+    property Quantity  : Integer read FQuantity write FQuantity;
+    property GrossPrice: Currency read GetGrossPrice;
   end;
 
 implementation
@@ -110,8 +163,8 @@ end;
 
 constructor TArtist.Create;
 begin
- inherited;
- FAlbums.SetInitialValue( TList< TAlbum >.Create );
+  inherited;
+  FAlbums.SetInitialValue( TList< TAlbum >.Create );
 end;
 
 destructor TArtist.Destroy;
@@ -120,7 +173,7 @@ begin
   inherited;
 end;
 
-function TArtist.GetAlbums: TList<TAlbum>;
+function TArtist.GetAlbums: TList< TAlbum >;
 begin
   Result := FAlbums.Value;
 end;
@@ -150,12 +203,91 @@ end;
 
 function TAlbum.GetArtist: TArtist;
 begin
- Result := FArtist.Value;
+  Result := FArtist.Value;
 end;
 
-procedure TAlbum.SetArtist(const Value: TArtist);
+procedure TAlbum.SetArtist( const Value: TArtist );
 begin
   FArtist.Value := Value;
+end;
+
+{ TInvoiceItem }
+
+constructor TInvoiceItem.Create;
+begin
+
+end;
+
+destructor TInvoiceItem.Destroy;
+begin
+
+  inherited;
+end;
+
+function TInvoiceItem.GetGrossPrice: Currency;
+begin
+    if Assigned( FAlbum ) then
+      Result := FAlbum.FAlbumPrice * FQuantity
+  else
+      Result := 0;
+end;
+
+function TInvoiceItem.GetInvoice: TInvoice;
+begin
+  Result := FInvoice.Value;
+end;
+
+procedure TInvoiceItem.SetInvoice( const Value: TInvoice );
+begin
+  FInvoice.Value := Value;
+end;
+
+{ TInvoice }
+
+function TInvoice.GetItems: TList< TInvoiceItem >;
+begin
+  Result := FItems.Value;
+end;
+
+constructor TInvoice.Create;
+begin
+  inherited;
+  FItems.SetInitialValue( TList< TInvoiceItem >.Create );
+end;
+
+destructor TInvoice.Destroy;
+begin
+  FItems.DestroyValue;
+  inherited;
+end;
+
+function TInvoice.GetCustomer: TCustomer;
+begin
+  Result := FCustomer.Value;
+end;
+
+procedure TInvoice.SetCustomer( const Value: TCustomer );
+begin
+  FCustomer.Value := Value;
+end;
+
+{ TCustomer }
+
+constructor TCustomer.Create;
+begin
+  inherited;
+  FInvoices.SetInitialValue( TList< TInvoice >.Create );
+end;
+
+destructor TCustomer.Destroy;
+begin
+  FInvoices.DestroyValue;
+  inherited;
+end;
+
+function TCustomer.GetInvoices: TList<TInvoice>;
+begin
+ Result := FInvoices.Value;
 end;
 
 initialization
@@ -163,6 +295,8 @@ initialization
 RegisterEntity( TCustomer );
 RegisterEntity( TLabel );
 RegisterEntity( TArtist );
-RegisterEntity(TAlbum);
+RegisterEntity( TAlbum );
+RegisterEntity( TInvoice );
+RegisterEntity( TInvoiceItem );
 
 end.

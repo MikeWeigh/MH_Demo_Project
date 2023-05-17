@@ -1,0 +1,22 @@
+
+
+*************** Start Log 16/05/2023 11:45:06 ***************
+
+          **********  No Errors Logged **********
+
+*************** End Log 16/05/2023 11:45:06 ***************
+
+
+
+*************** Start Log 16/05/2023 11:45:08 ***************
+
+[FireDAC][Phys][FB]violation of PRIMARY or UNIQUE KEY constraint "PK_CUSTOMER" on table "CUSTOMER"
+Problematic key value is ("ID" = 11)
+
+INSERT INTO CUSTOMER
+(ID, FIRST_NAME, LAST_NAME, ADDRESS_1, ADDRESS_2, CITY, 
+  POST_CODE, CONTACT_NO, DATE_OF_BIRTH)
+VALUES (:ID, :FIRST_NAME, :LAST_NAME, :ADDRESS_1, :ADDRESS_2, :CITY, 
+  :POST_CODE, :CONTACT_NO, :DATE_OF_BIRTH)
+
+*************** End Log 16/05/2023 11:45:08 ***************

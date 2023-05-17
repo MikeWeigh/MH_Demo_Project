@@ -61,7 +61,6 @@ type
     adsArtistId: TIntegerField;
     adsArtistArtistName: TStringField;
     adsArtistRecordLabel: TAureliusEntityField;
-    adsArtistLabelLookup: TStringField;
     adsAlbum: TAureliusDataset;
     adsAlbumSelf: TAureliusEntityField;
     adsAlbumId: TIntegerField;
@@ -69,17 +68,68 @@ type
     adsAlbumAlbumPrice: TCurrencyField;
     adsAlbumArtist: TAureliusEntityField;
     adsArtistAlbums: TDataSetField;
+    adsInvoice: TAureliusDataset;
+    adsInvoiceSelf: TAureliusEntityField;
+    adsInvoiceId: TIntegerField;
+    adsInvoiceInvoiceNo: TIntegerField;
+    adsInvoiceInvoiceDate: TDateTimeField;
+    adsInvoiceItems: TDataSetField;
+    adsInvoiceItem: TAureliusDataset;
+    adsInvoiceItemSelf: TAureliusEntityField;
+    adsInvoiceItemId: TIntegerField;
+    adsInvoiceItemInvoice: TAureliusEntityField;
+    adsInvoiceItemAlbum: TAureliusEntityField;
+    adsInvoiceItemQuantity: TIntegerField;
+    adsInvoiceItemGrossPrice: TCurrencyField;
+    adsInvoiceItemAlbumLookup: TStringField;
+    adsAlbumLookup: TAureliusDataset;
+    AureliusEntityField1: TAureliusEntityField;
+    IntegerField1: TIntegerField;
+    StringField1: TStringField;
+    CurrencyField1: TCurrencyField;
+    AureliusEntityField2: TAureliusEntityField;
+    adsInvoiceCustomer: TAureliusEntityField;
+    adsCustomerInvoices: TDataSetField;
+    adsInvoiceAll: TAureliusDataset;
+    AureliusEntityField3: TAureliusEntityField;
+    IntegerField2: TIntegerField;
+    IntegerField3: TIntegerField;
+    DateTimeField1: TDateTimeField;
+    DataSetField1: TDataSetField;
+    AureliusEntityField4: TAureliusEntityField;
+    adsArtistLabelLookup: TStringField;
+    adsCustomerPagination: TAureliusDataset;
+    AureliusEntityField5: TAureliusEntityField;
+    IntegerField4: TIntegerField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    StringField7: TStringField;
+    StringField8: TStringField;
+    DateField1: TDateField;
+    DataSetField2: TDataSetField;
     procedure DataModuleCreate( Sender: TObject );
     procedure AureliusModelEvents1SQLExecuting( Sender: TObject;
       Args: TSQLExecutingArgs );
     procedure adsCustomerBeforeOpen( Dataset: TDataSet );
     procedure adsLabelBeforeOpen( Dataset: TDataSet );
-    procedure adsArtistBeforeOpen(DataSet: TDataSet);
-    procedure adsAlbumBeforeOpen(DataSet: TDataSet);
+    procedure adsArtistBeforeOpen( Dataset: TDataSet );
+    procedure adsAlbumBeforeOpen( Dataset: TDataSet );
+    procedure adsInvoiceBeforeOpen( Dataset: TDataSet );
+    procedure adsInvoiceAllBeforeOpen( Dataset: TDataSet );
+    procedure adsInvoiceItemBeforeOpen( Dataset: TDataSet );
+    procedure adsAlbumLookupBeforeOpen( Dataset: TDataSet );
+    procedure adsCustomerPaginationBeforeOpen( Dataset: TDataSet );
+
+//    procedure adsCustomerPaginationObjectRefresh( Dataset: TDataSet;
+ //     AObject: TObject );
   private
     { Private declarations }
   public
     { Public declarations }
+    procedure LoadCustomers;
   end;
 
 var
@@ -88,26 +138,62 @@ var
 implementation
 
 uses
-  entities;
+  entities,
+  frm.Main;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
 
 
-procedure TdmMain.adsAlbumBeforeOpen(DataSet: TDataSet);
+var
+  Page: Integer;
+
+procedure TdmMain.adsAlbumBeforeOpen( Dataset: TDataSet );
 begin
   TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TAlbum > );
 end;
 
-procedure TdmMain.adsArtistBeforeOpen(DataSet: TDataSet);
+procedure TdmMain.adsAlbumLookupBeforeOpen( Dataset: TDataSet );
 begin
- TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TArtist > );
+  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TAlbum > );
+end;
+
+procedure TdmMain.adsArtistBeforeOpen( Dataset: TDataSet );
+begin
+  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TArtist > );
 end;
 
 procedure TdmMain.adsCustomerBeforeOpen( Dataset: TDataSet );
 begin
-  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TCustomer > );
+  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TCustomer >.Take( 20 ) );
+end;
+
+procedure TdmMain.adsCustomerPaginationBeforeOpen( Dataset: TDataSet );
+begin
+  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TCustomer >.Take( 20 ) );
+end;
+
+//procedure TdmMain.adsCustomerPaginationObjectRefresh( Dataset: TDataSet;
+//  AObject: TObject );
+//begin
+//  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TCustomer >.Take( 20 ).Skip( Page * 20 ) );
+//  Inc( Page );
+//end;
+
+procedure TdmMain.adsInvoiceBeforeOpen( Dataset: TDataSet );
+begin
+  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TInvoice > );
+end;
+
+procedure TdmMain.adsInvoiceAllBeforeOpen( Dataset: TDataSet );
+begin
+  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TInvoice > );
+end;
+
+procedure TdmMain.adsInvoiceItemBeforeOpen( Dataset: TDataSet );
+begin
+  TAureliusDataset( Dataset ).SetSourceCriteria( Manager.Find< TInvoiceItem > );
 end;
 
 procedure TdmMain.adsLabelBeforeOpen( Dataset: TDataSet );
@@ -125,17 +211,35 @@ begin
         CodeSite.Send( 'p.ToString', p.ToString );
 end;
 
+procedure TdmMain.LoadCustomers;
+begin
+// //Manager.Refresh(adsCustomerPagination);
+// adsCustomerPagination.Edit;
+ adsCustomerPagination.Close;
+// adsCustomerPagination.Open;
+  CodeSite.Send( 'HI' );
+end;
+
 procedure TdmMain.DataModuleCreate( Sender: TObject );
 begin
   Schema.UpdateDatabase;
   adsCustomer.Manager := Manager.ObjManager;
-  adsLabel.Manager    := Manager.ObjManager;
-  adsArtist.Manager  := Manager.ObjManager;
-  adsAlbum.Manager  := Manager.ObjManager;
+  adsCustomerPagination.Manager    := Manager.ObjManager;
+  adsLabel.Manager       := Manager.ObjManager;
+  adsArtist.Manager      := Manager.ObjManager;
+  adsAlbum.Manager       := Manager.ObjManager;
+  adsInvoice.Manager     := Manager.ObjManager;
+  adsInvoiceItem.Manager := Manager.ObjManager;
+  adsAlbumLookup.Manager := Manager.ObjManager;
   adsCustomer.Open;
+  adsCustomerPagination.Open;
   adsLabel.Open;
   adsArtist.Open;
+  adsAlbumLookup.Open;
   adsAlbum.Open;
+  adsInvoice.Open;
+  adsInvoiceAll.Open;
+  adsInvoiceItem.Open;
 end;
 
 end.
